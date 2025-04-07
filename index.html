@@ -1,184 +1,99 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>KRISHI Community Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Krishi Community Subscription</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
       margin: 0;
-      padding: 40px;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #f0fff0, #fff5cc);
-      color: #333;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-      min-height: 100vh;
+      padding: 0;
+      text-align: center;
     }
-
     .container {
-      background-color: #fff;
-      border: 3px solid #d4af37;
-      border-radius: 20px;
-      padding: 30px;
-      width: 95%;
-      max-width: 600px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #388e3c;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
       text-align: left;
     }
-
-    .logo {
-      display: block;
-      margin: 0 auto 15px auto;
-      width: 120px;
-    }
-
-    h1 {
-      text-align: center;
-      color: #228B22;
-      font-size: 24px;
-      margin-bottom: 5px;
-    }
-
-    h2 {
-      text-align: center;
-      color: #444;
-      margin-bottom: 25px;
-    }
-
-    form {
-      margin-top: 20px;
-    }
-
-    label {
-      font-weight: bold;
-      margin-top: 15px;
-      display: block;
-    }
-
-    input[type="text"],
-    input[type="email"] {
+    input {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 5px;
       border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
     }
-
-    input[type="submit"] {
-      background-color: #228B22;
-      color: white;
+    button {
+      background: #ffc107;
       border: none;
-      padding: 12px;
-      margin-top: 25px;
+      padding: 12px 20px;
       font-size: 16px;
-      border-radius: 30px;
+      border-radius: 5px;
       cursor: pointer;
-      width: 100%;
-      transition: background 0.3s ease;
+      color: #000;
     }
-
-    input[type="submit"]:hover {
-      background-color: #1a6e1a;
-    }
-
-    .telegram-link {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      background-color: white;
-      color: #228B22;
-      padding: 12px 25px;
-      text-decoration: none;
-      border-radius: 30px;
-      border: 2px solid #228B22;
-      font-weight: bold;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .telegram-link:hover {
-      background-color: #228B22;
-      color: white;
-    }
-
-
-    footer {
-      margin-top: 30px;
-      text-align: center;
-      font-size: 12px;
-      color: #777;
+    button:hover {
+      background: #ffb300;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="krishi_main.png" alt="KRISHI Logo" class="logo" />
-    <h1>🌿 48carat KRISHI Community</h1>
-    <a href="https://t.me/krishicoincommunity" class="telegram-link" target="_blank">
-      👉 Join Telegram Community
-    </a>
+    <h2>🌾 Join Krishi Community</h2>
+    <form id="krishiForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required />
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" required />
 
-    <h2>Register for KRISHI Community</h2>
-    <form id="krishiForm" onsubmit="submitForm(event)">
-      <label>Full Name:</label>
-      <input type="text" id="name" name="name" required>
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" id="mobile" pattern="[0-9]{10}" maxlength="10" required />
 
-      <label>Mobile Number:</label>
-      <input type="text" id="mobile" name="mobile" maxlength="10" pattern="\d{10}" required>
-
-      <label>Farmer ID (12-digit):</label>
-      <input type="text" id="farmer_id" name="farmer_id" maxlength="12" pattern="\d{12}" required>
-
-      <label>Email:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label>Village:</label>
-      <input type="text" id="village" name="village" required>
-
-      <label>City:</label>
-      <input type="text" id="city" name="city" required>
-
-      <label>State:</label>
-      <input type="text" id="state" name="state" required>
-
-      <label>Country:</label>
-      <input type="text" id="country" name="country" required>
-
-      <input type="submit" value="Pay ₹20 and Register">
+      <button type="submit">Pay ₹20 & Join</button>
     </form>
-
-    <footer>
-      &copy; 2025 48carat KRISHI Coin — Empowering Farmers with Blockchain 💚
-    </footer>
+    <div id="status"></div>
   </div>
 
   <script>
-    async function submitForm(event) {
-      event.preventDefault();
+    document.getElementById("krishiForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const mobile = document.getElementById("mobile").value;
 
-      const payload = {
-        name: document.getElementById('name').value,
-        mobile: document.getElementById('mobile').value,
-        farmer_id: document.getElementById('farmer_id').value,
-        email: document.getElementById('email').value,
-        village: document.getElementById('village').value,
-        city: document.getElementById('city').value,
-        state: document.getElementById('state').value,
-        country: document.getElementById('country').value,
-      };
+      const payload = { name, email, mobile };
 
-      const response = await fetch("https://krishi-project.onrender.com/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      try {
+        const res = await fetch("http://192.168.1.3:10000/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
 
-      const html = await response.text();
-      document.open();
-      document.write(html);
-      document.close();
-    }
+        const html = await res.text();
+        document.open();
+        document.write(html);
+        document.close();
+      } catch (err) {
+        document.getElementById("status").innerText = "Something went wrong. Try again.";
+      }
+    });
   </script>
 </body>
 </html>
