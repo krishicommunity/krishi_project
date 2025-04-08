@@ -1,22 +1,24 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, render_template, request, jsonify
 import hashlib
 
 app = Flask(__name__)
 
-# PayU Configuration (TEST CREDENTIALS)
+# PayU Configuration
 MERCHANT_KEY = "6QA8BW"
 MERCHANT_SALT = "IeBXlDTODKlw4JgClMn69BhsbZjrqULT"
-PAYU_BASE_URL = "https://test.payu.in/_payment"  # Use production URL in live mode
+PAYU_BASE_URL = "https://secure.payu.in"  # Use production URL later
 
 users = []
 
 @app.route('/')
 def home():
-    return render_template('index.html')  # This will serve your HTML form
+    return render_template('index.html')  # ✅ Correctly renders the HTML form
 
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
+    # your existing form logic here...
+    return jsonify({'message': 'User registered (mock response)'})
 
     if not data or 'mobile' not in data or len(data['mobile']) != 10:
         return jsonify({'error': 'Invalid registration data'}), 400
