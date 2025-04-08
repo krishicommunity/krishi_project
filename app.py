@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, request, jsonify, render_template
 import hashlib
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ users = []
 
 @app.route('/')
 def home():
-    return "Krishi Community Backend is Running."
+    return render_template('index.html')  # This will serve your HTML form
 
 @app.route('/register', methods=['POST'])
 def register():
