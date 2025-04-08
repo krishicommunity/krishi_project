@@ -18,7 +18,6 @@ def home():
 def register():
     data = request.get_json()
     # your existing form logic here...
-    return jsonify({'message': 'User registered (mock response)'})
 
     if not data or 'mobile' not in data or len(data['mobile']) != 10:
         return jsonify({'error': 'Invalid registration data'}), 400
