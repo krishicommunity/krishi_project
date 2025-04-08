@@ -6,7 +6,7 @@ app = Flask(__name__)
 # PayU Configuration
 MERCHANT_KEY = "6QA8BW"
 MERCHANT_SALT = "IeBXlDTODKlw4JgClMn69BhsbZjrqULT"
-PAYU_BASE_URL = "https://secure.payu.in"  # Use production URL later
+PAYU_BASE_URL = "https://secure.payu.in/_payment"  # Use production URL
 
 users = []
 
